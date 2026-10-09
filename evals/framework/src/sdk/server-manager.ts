@@ -160,8 +160,8 @@ export class ServerManager {
           console.log('[Server STDOUT]:', data.toString().trim());
         }
         
-        // Look for "opencode server listening on http://..."
-        const match = stdout.match(/opencode server listening on (http:\/\/[^\s]+)/);
+        // Look for "server listening on http://..." (older builds: "opencode server listening on ...")
+        const match = stdout.match(/(?:opencode )?server listening on (http:\/\/[^\s]+)/);
         if (match && !resolved) {
           resolved = true;
           clearTimeout(timeout);
@@ -184,7 +184,7 @@ export class ServerManager {
         }
         
         // Also check stderr for the startup message
-        const match = stderr.match(/opencode server listening on (http:\/\/[^\s]+)/);
+        const match = stderr.match(/(?:opencode )?server listening on (http:\/\/[^\s]+)/);
         if (match && !resolved) {
           resolved = true;
           clearTimeout(timeout);

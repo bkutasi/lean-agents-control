@@ -1,26 +1,10 @@
 ---
-description: Run the complete testing pipeline
+description: Run typecheck, build, and tests via lean gates
 ---
 
-# Testing Pipeline
+# Test (lean)
 
-This command runs the complete testing pipeline for the project.
-
-## Usage
-
-To run the complete testing pipeline, just type:
-
-1. Run pnpm type:check
-2. Run pnpm lint
-3. Run pnpm test
-4. Report any failures
-5. Fix any failures
-6. Repeat until all tests pass
-7. Report success
-
-## What This Command Does
-
-1. Runs `pnpm type:check` to check for type errors
-2. Runs `pnpm lint` to check for linting errors
-3. Runs `pnpm test` to run the tests
-4. Reports any failures
+1. BuildAgent: `ctx_shell` typecheck + build. Stop on fail, report path:line.
+2. TestEngineer: `ctx_shell` test runners. Positive+negative required, mocked externals.
+3. Reviewer (optional): `ctx_review` + `ctx_smells scan`.
+4. Record `ctx_session finding` + `ctx_feedback record`. Never auto-fix without approval.

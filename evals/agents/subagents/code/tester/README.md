@@ -3,7 +3,7 @@
 ## Overview
 
 **Agent:** `TestEngineer`  
-**Parent Agent:** `opencoder`  
+**Parent Agent:** `openagent`  
 **Description:** Test authoring and TDD specialist
 
 ## Test Structure

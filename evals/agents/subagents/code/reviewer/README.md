@@ -3,7 +3,7 @@
 ## Overview
 
 **Agent:** `CodeReviewer`  
-**Parent Agent:** `opencoder`  
+**Parent Agent:** `openagent`  
 **Description:** Code review, security, and quality assurance
 
 ## Test Structure

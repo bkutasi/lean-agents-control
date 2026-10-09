@@ -3,7 +3,7 @@
 ## Overview
 
 **Agent:** `CoderAgent`  
-**Parent Agent:** `opencoder`  
+**Parent Agent:** `openagent`  
 **Description:** Executes focused coding subtasks in sequence
 
 ## Test Structure

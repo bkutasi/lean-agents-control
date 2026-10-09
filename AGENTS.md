@@ -1,0 +1,74 @@
+<!-- lean-ctx-owned: AGENTS.md v1 -->
+<!-- lean-ctx-rules -->
+<!-- version: 11 -->
+
+CRITICAL: ALWAYS use lean-ctx ctx_* tools as mapped below.
+
+MANDATORY MAPPING:
+• Read/cat -> ctx_read(paths[], mode) — batch 2+ files in 1 call
+• Grep -> ctx_search(pattern, path)
+• Shell/bash -> ctx_shell(command)
+• Glob/find -> ctx_glob(pattern)
+• ls/find -> ctx_tree(path, depth)
+
+NEVER use built-in Read/Grep/Shell/Glob for these jobs. Other MCP servers keep their own jobs.
+
+Tool selection by intent (full 79-tool map in lean-ctx/docs/reference/appendix-mcp-tools.md):
+• Orient FIRST -> ctx_overview(task) then ctx_compose(task) — never search→read chains
+• Read file -> ctx_read(paths[], mode=signatures|map for context, full|anchored to edit, diff after edit, lines:N-M for range) — 1 call, N files
+• Search -> ctx_search(pattern) regex, ctx_search(action=semantic) meaning, ctx_search(action=symbol) exact symbol — never opencode native grep/glob
+• Explore cheaply -> ctx_explore(query) citations, ctx_semantic_search(query)
+• Structure -> ctx_outline, ctx_symbol, ctx_repomap, ctx_architecture, ctx_graph
+• Impact -> ctx_impact, ctx_callgraph, ctx_graph (call edges + file deps only; const/var refs use ctx_search)
+• Edit -> ctx_read(mode=anchored) then ctx_patch(ops[]) batch-atomic; ctx_edit legacy fallback; ctx_refactor for LSP rename/refs
+• Verify -> ctx_shell(test/build) + ctx_delta + ctx_verify + ctx_review + ctx_smells
+• Budget -> ctx_plan(task,budget) then ctx_compile(budget), track ctx_radar/ctx_metrics/ctx_cost/ctx_gain, manage ctx_ledger/ctx_control/ctx_context/ctx_cache
+• Proactive -> ctx_preload, ctx_prefetch, ctx_fill
+• Memory -> ctx_session(task|finding|decision|save|status) session, ctx_knowledge(remember|recall|consolidate) project, ctx_summary record/recall
+• Share/A2A -> ctx_agent(register|list|post|read), ctx_task(create|update|list|message), ctx_handoff(create|show|pull), ctx_share(push|pull) — NEVER ctx_workflow (global gate deadlock, P12)
+• External -> ctx_url_read(url,mode=facts|quotes), ctx_git_read(url), ctx_provider(query), ctx_tools(find|call) for downstream MCP
+• Govern -> ctx_rules(sync|diff|lint), ctx_proof(export), ctx_verify(proof|v2)
+• Lazy-load rest -> ctx_call(name,arguments) + ctx_discover_tools(query) + ctx_load_tools(category=arch|debug|memory|metrics|session)
+
+AGENT LOOP: Orient(ctx_overview/ctx_compose) -> Find(ctx_search) -> Read(ctx_read(paths[]) signatures|map) -> Trace(ctx_callgraph/ctx_impact) -> Edit(ctx_patch) -> Verify(ctx_shell + ctx_delta) -> Remember(ctx_session/ctx_knowledge)
+
+Anti-patterns: ctx_read(full) for orientation (use signatures); single reads in loop (use paths[]); search→read→outline chains (use ctx_compose); power-profile preload (use ctx_call lazy); quoting gain % as universal (denominator = lean-ctx-touched traffic only).
+BLOCKER→ASK: On blocker (missing binary e.g. shellcheck, missing dep, ambiguous spec, unsafe-eval, extension missing): STOP. Record ctx_task blocked + ctx_session finding. Return BLOCKED + 2-3 options → OpenAgent asks via question tool. NEVER auto npm/pip/cargo/apt, ctx_load_tools power, sudo. ctx_package/ctx_share/ctx_handoff for context passing ALLOWED.
+SCRATCH: Use .tmp/ only: TMPDIR=.tmp/, mktemp -d .tmp/..., .tmp/*.log, .tmp/mock-*, locks ${XDG_RUNTIME_DIR:-.tmp/}. NEVER /tmp/ (banned ex: mktemp -d /tmp/..., /tmp/*.log, /tmp/*.lock).
+DISCOVERY BUDGET: Pinned core = Allowed table row inline per agent, zero discovery for core. Max 1 ctx_discover_tools per session for non-core only, cache via ctx_session finding. OpenAgent pre-resolves and passes via handoff.
+<!-- /lean-ctx-rules -->
+
+# Lean Agent Control — OpenCode-only, lean-ctx-native
+
+1 primary + 10 subagents. Transport = OpenCode `task(subagent_type=...)`. Memory = lean-ctx daemon (`lean-ctx wrap opencode`, `serve --daemon`, socket `~/.local/share/lean-ctx/`).
+
+| Agent | File | Purpose | Allowed ctx_* (primary) |
+|---|---|---|---|
+| OpenAgent | `.opencode/agent/core/openagent.md` | sole primary, plan→approve→execute→validate | overview, compose, plan, compile, control, ledger, context, radar, session, knowledge, agent, task, handoff, share, intent (NO workflow — banned P12) |
+| context-scout | `.opencode/agent/subagents/core/contextscout.md` | local pattern discovery, read-only | overview, compose, search, semantic_search, explore, glob, tree, outline, symbol, repomap, multi_repo, artifacts, index, retrieve, expand |
+| external-scout | `.opencode/agent/subagents/core/externalscout.md` | live versioned docs | url_read, git_read, provider, tools, semantic_search, expand, knowledge(remember) |
+| task-manager | `.opencode/agent/subagents/core/task-manager.md` | break hard tasks, parallel batches | task, plan, session(task), handoff(create), knowledge(recall), intent, prefetch (NO workflow — banned P12) |
+| coder | `.opencode/agent/subagents/code/coder-agent.md` | implement subtasks | read, multi_read, smart_read, delta, patch, edit, symbol, outline, search, shell, execute, retrieve, expand, checkpoint, refactor, dedup, cache |
+| test-engineer | `.opencode/agent/subagents/code/test-engineer.md` | behavior tests, AAA, +/- cases | read, search, shell(test only), execute, delta, expand, verify, feedback, checkpoint |
+| build-validator | `.opencode/agent/subagents/code/build-agent.md` | typecheck+build, report only | shell(build only), analyze, compare, benchmark, metrics, discover, verify, cache, heatmap |
+| reviewer | `.opencode/agent/subagents/code/reviewer.md` | security-first review, read-only | review, smells, quality, quality_lab, optimize, impact, callgraph, graph, architecture, routes, refactor(refs) |
+| doc-writer | `.opencode/agent/subagents/core/documentation.md` | concise example-driven docs | compress, compress_memory, response, transcript_compact, summary, skillify, crush, dedup, fill, read, search |
+| frontend | `.opencode/agent/subagents/development/frontend-specialist.md` | 4-stage UI, approval per stage | coder set + url_read, routes, repomap, architecture |
+| devops | `.opencode/agent/subagents/development/devops-specialist.md` | pipelines/IaC, least privilege | read, search, shell(allowlisted), provider, multi_repo, checkpoint, pack, package, plugins, rules |
+
+A2A handshake (every worker): `ctx_agent register` → `ctx_agent list` → `ctx_session status` → `ctx_knowledge recall <task>` → work → `ctx_share push` + `ctx_session finding/decision` → `ctx_handoff create` → parent `task()` next agent → next `ctx_handoff accept` + `ctx_share pull`.
+
+Setup: `lean-ctx init --agent opencode && lean-ctx init --global && lean-ctx rules sync && lean-ctx doctor`.
+Profiles: `lean-ctx tools power` (all 79, lazy via `ctx_call`); per-call overhead gated by `lean-ctx doctor overhead --gate`.
+<!-- lean-ctx-compression -->
+OUTPUT STYLE: concise
+- Bullet points over paragraphs
+- 1-sentence explanations max, then code/action
+<!-- /lean-ctx-compression -->
+
+<!-- lean-ctx -->
+## lean-ctx
+
+lean-ctx is active — the MCP tools replace native equivalents.
+Full rules: LEAN-CTX.md (open on demand — do not auto-load).
+<!-- /lean-ctx -->

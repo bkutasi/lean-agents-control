@@ -3,7 +3,7 @@
 ## Overview
 
 **Agent:** `BuildAgent`  
-**Parent Agent:** `opencoder`  
+**Parent Agent:** `openagent`  
 **Description:** Type checking and build validation specialist
 
 ## Test Structure
