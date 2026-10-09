@@ -79,8 +79,8 @@ export interface TestRunnerConfig {
    * - Custom session storage locations
    * 
    * Example:
-   * - Git root: /Users/user/opencode-agents (sessions stored here)
-   * - Test CWD: /Users/user/opencode-agents/evals/framework (tests run here)
+   * - Git root: ~/lean-agents-control (sessions stored here)
+   * - Test CWD: ~/lean-agents-control/evals/framework (tests run here)
    * - projectPath should be git root, not test CWD
    */
   projectPath?: string;
@@ -250,8 +250,9 @@ export class TestRunner {
       // Subagents - code
       'coder-agent': 'subagents/code/coder-agent.md',
       'CoderAgent': 'subagents/code/coder-agent.md',
-      'tester': 'subagents/code/tester.md',
-      'TestEngineer': 'subagents/code/tester.md',
+      'tester': 'subagents/code/test-engineer.md',
+      'test-engineer': 'subagents/code/test-engineer.md',
+      'TestEngineer': 'subagents/code/test-engineer.md',
       'reviewer': 'subagents/code/reviewer.md',
       'CodeReviewer': 'subagents/code/reviewer.md',
       'build-agent': 'subagents/code/build-agent.md',

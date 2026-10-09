@@ -128,10 +128,11 @@ export class ContentEvaluator extends BaseEvaluator {
         return filePath.substring(evalsTmpIndex);
       }
       
-      // Try to find 'opencode-agents/' and get everything after it
-      const projectIndex = filePath.indexOf('opencode-agents/');
+      // Try to find repo root marker ('lean-agents-control/' or legacy 'opencode-agents/') and get everything after it
+      const projectIndex = filePath.indexOf('lean-agents-control/') !== -1 ? filePath.indexOf('lean-agents-control/') : filePath.indexOf('opencode-agents/');
       if (projectIndex !== -1) {
-        return filePath.substring(projectIndex + 'opencode-agents/'.length);
+        const markerLen = filePath.indexOf('lean-agents-control/') !== -1 ? 'lean-agents-control/'.length : 'opencode-agents/'.length;
+        return filePath.substring(projectIndex + markerLen);
       }
     }
     return filePath;

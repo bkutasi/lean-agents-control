@@ -57,8 +57,8 @@ const getDefaultSessionStoragePath = (): string => {
  * context, so we need to look there for session storage.
  * 
  * Example:
- * - Git root: /Users/user/opencode-agents
- * - Test CWD: /Users/user/opencode-agents/evals/framework
+ * - Git root: ~/lean-agents-control
+ * - Test CWD: ~/lean-agents-control/evals/framework
  * - Sessions stored under git root hash, not test framework hash
  */
 export const defaultConfig: FrameworkConfig = {
@@ -231,7 +231,7 @@ export const getLegacySessionPartPath = (
  * Supports:
  * - Old format: "openagent" → ".opencode/agent/openagent.md"
  * - New format: "core/openagent" → ".opencode/agent/core/openagent.md"
- * - Subagents: "subagents/code/tester" → ".opencode/agent/subagents/code/tester.md"
+ * - Subagents: "subagents/code/test-engineer" → ".opencode/agent/subagents/code/test-engineer.md" (alias: "tester")
  * 
  * @param agent - Agent identifier (e.g., "openagent" or "core/openagent")
  * @param projectPath - Project root path (defaults to git root)
@@ -306,7 +306,7 @@ export const normalizeAgentId = (agent: string): string => {
  * Examples:
  * - "core/openagent" → "core"
  * - "development/frontend-specialist" → "development"
- * - "subagents/code/tester" → "subagents/code"
+ * - "subagents/code/test-engineer" → "subagents/code"
  * - "openagent" → undefined (flat structure)
  * 
  * @param agent - Agent identifier

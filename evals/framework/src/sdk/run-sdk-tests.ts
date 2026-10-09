@@ -9,13 +9,12 @@
  *   npm run eval:sdk -- --verbose
  *   npm run eval:sdk -- --no-evaluators
  *   npm run eval:sdk -- --core
- *   npm run eval:sdk -- --agent=opencoder
  *   npm run eval:sdk -- --agent=openagent
  *   npm run eval:sdk -- --model=opencode/grok-code-fast
  *   npm run eval:sdk -- --model=anthropic/claude-3-5-sonnet-20241022
  *   npm run eval:sdk -- --pattern="developer/*.yaml" --model=openai/gpt-4-turbo
  *   npm run eval:sdk -- --prompt-variant=gpt --agent=openagent
- *   npm run eval:sdk -- --agent=opencoder --verbose  # Show full conversations
+ *   npm run eval:sdk -- --agent=openagent --verbose  # Show full conversations
  * 
  * Options:
  *   --debug              Enable debug logging and keep sessions for inspection
@@ -23,11 +22,11 @@
  *                        (automatically enables --debug)
  *   --no-evaluators      Skip running evaluators (faster)
  *   --core               Run core test suite only (7 tests, ~5-8 min)
- *   --agent=AGENT        Run tests for specific agent (openagent, opencoder)
+ *   --agent=AGENT        Run tests for specific agent (openagent)
  *   --subagent=NAME      Test a subagent (coder-agent, tester, reviewer, etc.)
  *                        Default: Standalone mode (forces mode: primary)
  *   --delegate           Test subagent via parent delegation (requires --subagent)
- *                        Uses appropriate parent agent (opencoder, openagent, etc.)
+ *                        Uses parent agent (openagent)
  *   --model=PROVIDER/MODEL  Override default model (default: opencode/grok-code-fast)
  *   --pattern=GLOB       Run specific test files (default: star-star/star.yaml)
  *   --timeout=MS         Test timeout in milliseconds (default: 60000)
@@ -326,17 +325,15 @@ async function main() {
     
     // Map subagents to their parent agents for delegation testing
     const subagentParentMap: Record<string, string> = {
-      // Code subagents → opencoder
-      'coder-agent': 'opencoder',
-      'CoderAgent': 'opencoder',
-      'tester': 'opencoder',
-      'TestEngineer': 'opencoder',
-      'reviewer': 'opencoder',
-      'CodeReviewer': 'opencoder',
-      'build-agent': 'opencoder',
-      'BuildAgent': 'opencoder',
-      'codebase-pattern-analyst': 'opencoder',
-      'PatternAnalyst': 'opencoder',
+      // Code subagents → openagent (sole primary)
+      'coder-agent': 'openagent',
+      'CoderAgent': 'openagent',
+      'tester': 'openagent',
+      'TestEngineer': 'openagent',
+      'reviewer': 'openagent',
+      'CodeReviewer': 'openagent',
+      'build-agent': 'openagent',
+      'BuildAgent': 'openagent',
       
       // Core subagents → openagent
       'task-manager': 'openagent',
@@ -346,21 +343,7 @@ async function main() {
       'contextscout': 'openagent',
       'ContextScout': 'openagent',
       
-      // System-builder subagents → system-builder
-      'agent-generator': 'system-builder',
-      'AgentGenerator': 'system-builder',
-      'command-creator': 'system-builder',
-      'CommandCreator': 'system-builder',
-      'context-organizer': 'system-builder',
-      'ContextOrganizer': 'system-builder',
-      'domain-analyzer': 'system-builder',
-      'DomainAnalyzer': 'system-builder',
-      'workflow-designer': 'system-builder',
-      'WorkflowDesigner': 'system-builder',
-      
-      // Utils → openagent
-      'image-specialist': 'openagent',
-      'ImageSpecialist': 'openagent',
+      // Deleted agents (system-builder, image-specialist) pruned — no surviving defs
     };
     
     if (isDelegationTest) {
@@ -370,15 +353,10 @@ async function main() {
       if (!parentAgent) {
         console.error(`❌ Error: Unknown subagent '${args.subagent}'`);
         console.error('\n📋 Available subagents:');
-        console.error('\n  Code subagents (parent: opencoder):');
-        console.error('    - CoderAgent, TestEngineer, CodeReviewer, BuildAgent, PatternAnalyst');
+        console.error('\n  Code subagents (parent: openagent):');
+        console.error('    - CoderAgent, TestEngineer, CodeReviewer, BuildAgent');
         console.error('\n  Core subagents (parent: openagent):');
-        console.error('    - TaskManager, DocWriter, ContextScout');
-        console.error('\n  System-builder subagents (parent: system-builder):');
-        console.error('    - AgentGenerator, CommandCreator, ContextOrganizer');
-        console.error('    - DomainAnalyzer, WorkflowDesigner');
-        console.error('\n  Utils subagents (parent: openagent):');
-        console.error('    - ImageSpecialist\n');
+        console.error('    - TaskManager, DocWriter, ContextScout\n');
         process.exit(1);
       }
       
@@ -414,8 +392,8 @@ async function main() {
     const agentCategoryMap: Record<string, string> = {
       'openagent': 'core/openagent',
       'OpenAgent': 'core/openagent',
-      'opencoder': 'core/opencoder',
-      'OpenCoder': 'core/opencoder',
+      'opencoder': 'core/openagent', // remapped: core/opencoder deleted, sole primary is core/openagent
+      'OpenCoder': 'core/openagent', // remapped: core/opencoder deleted
       'system-builder': 'meta/system-builder',
       'OpenSystemBuilder': 'meta/system-builder',
       'codebase-agent': 'development/codebase-agent',
@@ -441,8 +419,9 @@ async function main() {
       // Code subagents
       'coder-agent': 'subagents/code/coder-agent',
       'CoderAgent': 'subagents/code/coder-agent',
-      'tester': 'subagents/code/tester',
-      'TestEngineer': 'subagents/code/tester',
+      'tester': 'subagents/code/test-engineer',
+      'test-engineer': 'subagents/code/test-engineer',
+      'TestEngineer': 'subagents/code/test-engineer',
       'reviewer': 'subagents/code/reviewer',
       'CodeReviewer': 'subagents/code/reviewer',
       'build-agent': 'subagents/code/build-agent',
@@ -494,7 +473,7 @@ async function main() {
     console.log(`Testing agent: ${agentToTest}\n`);
   } else {
     // Test all core agents + shared tests (using new category-based paths)
-    const availableAgents = ['core/openagent', 'core/opencoder'];
+    const availableAgents = ['core/openagent'];
     testDirs = [...availableAgents.map(a => resolveAgentTestDir(a)), sharedTestsDir];
     console.log(`Testing all agents: ${availableAgents.join(', ')}\n`);
   }
@@ -705,8 +684,8 @@ async function main() {
       const agentCategoryMap: Record<string, string> = {
         'openagent': 'core/openagent',
         'OpenAgent': 'core/openagent',
-        'opencoder': 'core/opencoder',
-        'OpenCoder': 'core/opencoder',
+        'opencoder': 'core/openagent', // remapped: core/opencoder deleted
+        'OpenCoder': 'core/openagent', // remapped: core/opencoder deleted
         'system-builder': 'meta/system-builder',
         'OpenSystemBuilder': 'meta/system-builder',
         'codebase-agent': 'development/codebase-agent',
