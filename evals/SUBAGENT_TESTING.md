@@ -52,10 +52,10 @@ make test-subagent-delegate SUBAGENT=coder-agent
 
 ## 📋 Available Subagents
 
-### Code Subagents (Parent: opencoder)
+### Code Subagents (Parent: openagent)
 ```bash
 --subagent=coder-agent              # Simple task executor
---subagent=tester                   # Test authoring
+--subagent=test-engineer            # Test authoring (alias: tester)
 --subagent=reviewer                 # Code review
 --subagent=build-agent              # Type check & build
 --subagent=codebase-pattern-analyst # Pattern analysis
@@ -95,7 +95,7 @@ npm run eval:sdk -- --subagent=coder-agent --pattern="**/smoke-test.yaml"
 make test-subagent SUBAGENT=coder-agent
 ```
 
-### Test coder-agent via opencoder delegation
+### Test coder-agent via openagent delegation
 ```bash
 # With npm
 npm run eval:sdk -- --subagent=coder-agent --delegate --verbose
@@ -106,7 +106,7 @@ make test-subagent-delegate SUBAGENT=coder-agent
 
 ### Test with specific model
 ```bash
-npm run eval:sdk -- --subagent=tester --model=anthropic/claude-3-5-sonnet-20241022
+npm run eval:sdk -- --subagent=test-engineer --model=anthropic/claude-3-5-sonnet-20241022
 ```
 
 ### Debug with verbose output
@@ -134,8 +134,8 @@ Starting test runner...
 ```
 🔗 Delegation Test Mode
    Subagent: coder-agent
-   Parent: opencoder
-   Tests will verify delegation from opencoder → coder-agent
+   Parent: openagent
+   Tests will verify delegation from openagent → coder-agent
 
 Starting test runner...
 ✅ Test runner started
@@ -153,8 +153,8 @@ $ npm run eval:sdk -- --subagent=unknown-agent
 
 📋 Available subagents:
 
-  Code subagents (parent: opencoder):
-    - coder-agent, tester, reviewer, build-agent, codebase-pattern-analyst
+  Code subagents (parent: openagent):
+    - coder-agent, test-engineer, reviewer, build-agent, codebase-pattern-analyst
 
   Core subagents (parent: openagent):
     - task-manager, documentation, contextscout
@@ -183,7 +183,7 @@ $ npm run eval:sdk -- --agent=openagent --subagent=coder-agent --delegate
 $ npm run eval:sdk -- --subagent=missing-agent
 
 ❌ Error: Agent file not found: .opencode/agent/subagents/code/missing-agent.md
-Available agents: openagent, opencoder, coder-agent, tester, ...
+Available agents: openagent, coder-agent, test-engineer, ...
 ```
 
 ---
@@ -199,7 +199,7 @@ evals/agents/subagents/
         │   ├── 01-simple-task.yaml
         │   └── 02-error-handling.yaml
         └── delegation/           # For --subagent --delegate mode
-            ├── 01-opencoder-delegates.yaml
+            ├── 01-openagent-delegates.yaml
             └── 02-task-completion.yaml
 ```
 
@@ -225,8 +225,8 @@ expectedViolations:
 ### Delegation Test Example
 ```yaml
 id: coder-delegation-01
-name: OpenCoder Delegates to Coder Agent
-description: Test opencoder correctly delegates to coder-agent
+name: OpenAgent Delegates to Coder Agent
+description: Test openagent correctly delegates to coder-agent
 
 prompts:
   - text: |

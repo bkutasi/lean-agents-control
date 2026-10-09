@@ -10,8 +10,8 @@ description: |
   - ContextScout provides the expected files for agent creation
   
   Expected Files in Response:
-  - .opencode/context/openagents-repo/core-concepts/agents.md
-  - .opencode/context/openagents-repo/guides/adding-agent.md
+  - .opencode/context/lean-agents-repo/core-concepts/agents.md
+  - .opencode/context/lean-agents-repo/guides/adding-agent.md
   - .opencode/context/core/standards/code-quality.md
   
   This test SHOULD FAIL if:
@@ -28,7 +28,7 @@ prompts:
       
       Topic: agent-creation
       
-      I need to understand how to create a new agent in the OpenAgents repository.
+      I need to understand how to create a new agent in the lean-agents-control repository.
       
       Return:
       - Exact file paths to relevant context files
@@ -56,8 +56,8 @@ behavior:
   # Validate response content
   expectedResponse:
     contains:
-      - ".opencode/context/openagents-repo/core-concepts/agents.md"
-      - ".opencode/context/openagents-repo/guides/adding-agent.md"
+      - ".opencode/context/lean-agents-repo/core-concepts/agents.md"
+      - ".opencode/context/lean-agents-repo/guides/adding-agent.md"
       - ".opencode/context/core/standards/code-quality.md"
     description: "Response must include exact file paths for agent creation context"
 
@@ -73,7 +73,7 @@ tags:
 # Expected outcome:
 # - ContextScout uses glob/read to discover files
 # - ContextScout's final response includes:
-#   * .opencode/context/openagents-repo/core-concepts/agents.md
-#   * .opencode/context/openagents-repo/guides/adding-agent.md
+#   * .opencode/context/lean-agents-repo/core-concepts/agents.md
+#   * .opencode/context/lean-agents-repo/guides/adding-agent.md
 #   * .opencode/context/core/standards/code-quality.md
 # - Response provides priority ratings and summaries

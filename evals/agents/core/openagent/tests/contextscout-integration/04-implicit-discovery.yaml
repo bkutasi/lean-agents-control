@@ -59,6 +59,6 @@ tags:
 # Expected outcome:
 # - Agent recognizes "registry system" as unfamiliar domain
 # - Agent delegates to ContextScout WITHOUT being told
-# - ContextScout finds .opencode/context/openagents-repo/core-concepts/registry.md
+# - ContextScout finds .opencode/context/lean-agents-repo/core-concepts/registry.md
 # - Agent loads discovered files
 # - Agent provides accurate answer about registry and auto-detect

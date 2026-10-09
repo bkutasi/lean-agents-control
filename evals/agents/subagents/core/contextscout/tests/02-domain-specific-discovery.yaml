@@ -6,14 +6,14 @@ description: |
   
   This validates:
   - ContextScout searches in domain-specific directories
-  - ContextScout finds openagents-repo context
+  - ContextScout finds lean-agents-repo context
   - ContextScout prioritizes domain files over generic ones
   - ContextScout checks navigation.md first
   - ContextScout returns comprehensive results
   
   Expected Behavior:
-  - SHOULD check .opencode/context/openagents-repo/navigation.md first
-  - MUST find .opencode/context/openagents-repo/core-concepts/evals.md
+  - SHOULD check .opencode/context/lean-agents-repo/navigation.md first
+  - MUST find .opencode/context/lean-agents-repo/core-concepts/evals.md
   - SHOULD prioritize domain-specific over generic files
   - MUST return exact paths with priorities
   - SHOULD include related files (guides, examples)
@@ -72,8 +72,8 @@ tags:
   - critical
 
 # Expected outcome:
-# - Checks .opencode/context/openagents-repo/navigation.md
-# - Finds .opencode/context/openagents-repo/core-concepts/evals.md (⭐⭐⭐⭐⭐)
+# - Checks .opencode/context/lean-agents-repo/navigation.md
+# - Finds .opencode/context/lean-agents-repo/core-concepts/evals.md (⭐⭐⭐⭐⭐)
 # - May also find guides/testing-agent.md (⭐⭐⭐⭐)
 # - Returns structured response with exact paths and priorities
 # - Provides loading strategy (load concepts first, then guides)

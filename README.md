@@ -1,8 +1,6 @@
 <div align="center">
 
-![OpenAgents Control Hero](docs/images/hero-image.png)
-
-# OpenAgents Control (OAC)
+# Lean Agents Control (LAC)
 
 ### Control your AI patterns. Get repeatable results.
 
@@ -29,7 +27,7 @@
 
 ---
 
-> **Built on [OpenCode](https://opencode.ai)** - An open-source AI coding framework. OAC extends OpenCode with specialized agents, context management, and team workflows.
+> **Built on [OpenCode](https://opencode.ai)** - An open-source AI coding framework. LAC extends OpenCode with specialized agents, context management, and team workflows.
 
 ---
 
@@ -56,11 +54,11 @@ export async function POST(request: Request) {
 
 ## The Solution
 
-**OpenAgentsControl teaches agents your patterns upfront.** They understand your coding standards, your architecture, your security requirements. They propose plans before implementing. They execute incrementally with validation.
+**LeanAgentsControl teaches agents your patterns upfront.** They understand your coding standards, your architecture, your security requirements. They propose plans before implementing. They execute incrementally with validation.
 
 **The result:** Production-ready code that ships without heavy rework.
 
-### What Makes OAC Different
+### What Makes LAC Different
 
 **🎯 Context-Aware (Your Secret Weapon)**  
 Agents load YOUR patterns before generating code. Code matches your project from the start. No refactoring needed.
@@ -80,13 +78,13 @@ Store YOUR coding patterns once. Entire team uses same standards. Commit context
 **🔄 Model Agnostic**  
 Use any AI model (Claude, GPT, Gemini, local). No vendor lock-in.
 
-**Full-stack development:** OAC handles both frontend and backend work. The agents coordinate to build complete features from UI to database.
+**Full-stack development:** LAC handles both frontend and backend work. The agents coordinate to build complete features from UI to database.
 
 ---
 
 ## 🆚 Quick Comparison
 
-| Feature | OpenAgentsControl | Cursor/Copilot | Aider | Oh My OpenCode |
+| Feature | LeanAgentsControl | Cursor/Copilot | Aider | Oh My OpenCode |
 |---------|-------------------|----------------|-------|----------------|
 | **Learn Your Patterns** | ✅ Built-in context system | ❌ No pattern learning | ❌ No pattern learning | ⚠️ Manual setup |
 | **Approval Gates** | ✅ Always required | ⚠️ Optional (default off) | ❌ Auto-executes | ❌ Fully autonomous |
@@ -98,7 +96,7 @@ Use any AI model (Claude, GPT, Gemini, local). No vendor lock-in.
 | **Error Recovery** | ✅ Human-guided validation | ⚠️ Auto-retry (can loop) | ⚠️ Auto-retry | ✅ Self-correcting |
 | **Best For** | Production code, teams | Quick prototypes | Solo developers | Power users, complex projects |
 
-**Use OAC when:**
+**Use LAC when:**
 - ✅ You have established coding patterns
 - ✅ You want code that ships without refactoring
 - ✅ You need approval gates for quality control
@@ -163,7 +161,7 @@ opencode --agent OpenAgent
 
 ### Alternative: Claude Code Plugin (BETA)
 
-**Prefer Claude Code?** OpenAgents Control is also available as a Claude Code plugin!
+**Prefer Claude Code?** Lean Agents Control is also available as a Claude Code plugin!
 
 **Installation:**
 
@@ -174,12 +172,12 @@ opencode --agent OpenAgent
 
 2. Install the plugin:
 ```bash
-/plugin install oac
+/plugin install lac
 ```
 
 3. Download context files:
 ```bash
-/oac:setup --core
+/lac:setup --core
 ```
 
 4. Start building:
@@ -192,9 +190,9 @@ Add a login endpoint
 - ✅ Context-aware code generation
 - ✅ 7 specialized subagents (task-manager, context-scout, context-manager, coder-agent, test-engineer, code-reviewer, external-scout)
 - ✅ 9 workflow skills + 6 user commands
-- ✅ Flexible context discovery (.oac config, .claude/context, context, .opencode/context)
+- ✅ Flexible context discovery (.lac config, .claude/context, context, .opencode/context)
 - ✅ Add context from GitHub, worktrees, local files, or URLs
-- ✅ Easy feature planning with `/oac:plan`
+- ✅ Easy feature planning with `/lac:plan`
 
 **Documentation:**
 - [Plugin README](./plugins/claude-code/README.md) - Complete plugin documentation
@@ -209,7 +207,7 @@ Add a login endpoint
 
 **The problem with AI code:** It doesn't match your patterns. You spend hours refactoring.
 
-**The OAC solution:** Teach your patterns once. Agents load them automatically. Code matches from the start.
+**The LAC solution:** Teach your patterns once. Agents load them automatically. Code matches from the start.
 
 ### How It Works
 
@@ -250,7 +248,7 @@ Ships without refactoring ✅
 - Large token overhead per request
 - Slow responses, high costs
 
-**OAC approach:**
+**LAC approach:**
 - Loads only relevant patterns
 - Context files <200 lines (quick to load)
 - Lazy loading (agents load what they need)
@@ -265,7 +263,7 @@ Ships without refactoring ✅
 
 **The team problem:** Every developer writes code differently. Inconsistent patterns. Hard to maintain.
 
-**The OAC solution:** Store team patterns in `.opencode/context/project/`. Commit to repo. Everyone uses same standards.
+**The LAC solution:** Store team patterns in `.opencode/context/project/`. Commit to repo. Everyone uses same standards.
 
 **Example workflow:**
 ```bash
@@ -291,7 +289,7 @@ git push
 ### The Core Idea
 
 **Most AI tools:** Generic code → You refactor  
-**OpenAgentsControl:** Your patterns → AI generates matching code  
+**LeanAgentsControl:** Your patterns → AI generates matching code  
 
 ### The Workflow
 
@@ -334,7 +332,7 @@ Agents are markdown files you can edit. Change workflows, add constraints, custo
 Before generating code, ContextScout discovers relevant patterns from your context files. Ranks by priority (Critical → High → Medium). Prevents wasted work.
 
 **2. Editable Agents - Full Control**  
-Unlike Cursor/Copilot where behavior is baked into plugins, OAC agents are markdown files. Edit them directly:
+Unlike Cursor/Copilot where behavior is baked into plugins, LAC agents are markdown files. Edit them directly:
 ```bash
 nano .opencode/agent/core/opencoder.md  # local project install
 # Or: nano ~/.config/opencode/agent/core/opencoder.md  # global install
@@ -627,7 +625,7 @@ Agents automatically use updated patterns.
 
 ## 🎯 Is This For You?
 
-### ✅ Use OAC if you:
+### ✅ Use LAC if you:
 - Build production code that ships without heavy rework
 - Work in a team with established coding standards
 - Want control over agent behavior (not black-box plugins)
@@ -636,7 +634,7 @@ Agents automatically use updated patterns.
 - Want repeatable, consistent results
 - Use multiple AI models (no vendor lock-in)
 
-### ⚠️ Skip OAC if you:
+### ⚠️ Skip LAC if you:
 - Want fully autonomous execution without approval gates
 - Prefer "just do it" mode over human-guided workflows
 - Don't have established coding patterns yet
@@ -648,14 +646,14 @@ Agents automatically use updated patterns.
 **Try this test:**
 1. Ask your current AI tool to generate an API endpoint
 2. Count how many minutes you spend refactoring it to match your patterns
-3. If you're spending time on refactoring, OAC will save you that time
+3. If you're spending time on refactoring, LAC will save you that time
 
 **Or ask yourself:**
 - Do you have coding standards your team follows?
 - Do you spend time refactoring AI-generated code?
 - Do you want AI to follow YOUR patterns, not generic ones?
 
-If you answered "yes" to any of these, OAC is for you.
+If you answered "yes" to any of these, LAC is for you.
 
 ---
 
@@ -726,15 +724,15 @@ A: Run `/add-context --update` anytime your patterns change. Agents automaticall
 ### Comparison
 
 **Q: How is this different from Cursor/Copilot?**  
-A: OAC has editable agents (not baked-in), approval gates (not auto-execute), context system (YOUR patterns), and MVI token efficiency.
+A: LAC has editable agents (not baked-in), approval gates (not auto-execute), context system (YOUR patterns), and MVI token efficiency.
 
 **Q: How is this different from Aider?**  
-A: OAC has team patterns, context system, approval workflow, and smart pattern discovery. Aider is file-based only.
+A: LAC has team patterns, context system, approval workflow, and smart pattern discovery. Aider is file-based only.
 
 **Q: How does this compare to Oh My OpenCode?**  
-A: Both are built on OpenCode. OAC focuses on **control & repeatability** (approval gates, pattern control, team standards). Oh My OpenCode focuses on **autonomy & speed** (parallel agents, auto-execution). [Read detailed comparison →](https://github.com/darrenhinde/OpenAgentsControl/discussions/116)
+A: Both are built on OpenCode. LAC focuses on **control & repeatability** (approval gates, pattern control, team standards). Oh My OpenCode focuses on **autonomy & speed** (parallel agents, auto-execution). [Read detailed comparison →](https://github.com/darrenhinde/OpenAgentsControl/discussions/116)
 
-**Q: When should I NOT use OAC?**  
+**Q: When should I NOT use LAC?**  
 A: If you want fully autonomous execution without approval gates, or if you don't have established coding patterns yet.
 
 ### Setup
@@ -791,7 +789,7 @@ We welcome contributions!
 3. Update documentation for any changes
 4. Ensure security best practices are followed
 
-See: [Contributing Guide](docs/contributing/CONTRIBUTING.md) • [Code of Conduct](docs/contributing/CODE_OF_CONDUCT.md)
+See: [Contributing Guide](.github/ISSUE_TEMPLATE/) • [Security Policy](SECURITY.md)
 
 ---
 

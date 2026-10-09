@@ -52,7 +52,7 @@ expectations:
 
 **Expected Behavior**:
 - Agent should use ContextScout to discover eval-specific context
-- ContextScout finds `.opencode/context/openagents-repo/core-concepts/evals.md`
+- ContextScout finds `.opencode/context/lean-agents-repo/core-concepts/evals.md`
 - Agent loads discovered files
 - More accurate than guessing
 
@@ -68,7 +68,7 @@ expectations:
     tool: "task"
     args_contain: "ContextScout"
   - type: context_loaded
-    contexts: [".opencode/context/openagents-repo/core-concepts/evals.md"]
+    contexts: [".opencode/context/lean-agents-repo/core-concepts/evals.md"]
   - type: max_duration
     value: 60000  # Discovery adds time, but finds right context
 ```
@@ -130,7 +130,7 @@ expectations:
       - ".opencode/context/core/standards/code.md"
       - ".opencode/context/core/standards/tests.md"
       - ".opencode/context/core/standards/docs.md"
-      - ".opencode/context/openagents-repo/guides/adding-agent.md"
+      - ".opencode/context/lean-agents-repo/guides/adding-agent.md"
   - type: loading_order
     check: "critical_files_loaded_first"
 ```

@@ -6,13 +6,13 @@ description: |
   
   This validates:
   - ContextScout finds test-coverage.md in core/standards
-  - ContextScout finds testing guides in openagents-repo
+  - ContextScout finds testing guides in lean-agents-repo
   - ContextScout prioritizes standards over guides
   - ContextScout includes security testing if relevant
   
   Expected Files (in priority order):
   1. .opencode/context/core/standards/test-coverage.md (CRITICAL)
-  2. .opencode/context/openagents-repo/guides/testing-agent.md (HIGH)
+  2. .opencode/context/lean-agents-repo/guides/testing-agent.md (HIGH)
   3. .opencode/context/core/standards/code-quality.md (MEDIUM)
   
   This test SHOULD FAIL if:
@@ -68,7 +68,7 @@ tags:
 # - Uses glob to find files matching "test" in core/standards
 # - Uses read to load:
 #   * .opencode/context/core/standards/test-coverage.md
-#   * .opencode/context/openagents-repo/guides/testing-agent.md
+#   * .opencode/context/lean-agents-repo/guides/testing-agent.md
 #   * .opencode/context/core/standards/code-quality.md
 # - Returns structured response with:
 #   * Priority 1 (CRITICAL): test-coverage.md - Coverage requirements

@@ -29,7 +29,7 @@ assertions:
     with_args:
       subagent_type: "ContextScout"
   - type: output_contains
-    value: ".opencode/context/openagents-repo/core-concepts/evals.md"
+    value: ".opencode/context/lean-agents-repo/core-concepts/evals.md"
 
 timeout: 300000
 

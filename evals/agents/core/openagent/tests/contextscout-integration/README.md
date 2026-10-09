@@ -48,7 +48,7 @@ These tests answer:
 
 **Success Criteria**:
 - ✅ Delegates to ContextScout
-- ✅ Finds `.opencode/context/openagents-repo/core-concepts/evals.md`
+- ✅ Finds `.opencode/context/lean-agents-repo/core-concepts/evals.md`
 - ✅ Loads discovered files
 - ✅ Provides comprehensive answer
 

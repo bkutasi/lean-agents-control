@@ -33,7 +33,7 @@ npm run eval:sdk
 
 # Run specific agent
 npm run eval:sdk -- --agent=openagent
-npm run eval:sdk -- --agent=opencoder
+npm run eval:sdk -- --agent=openagent
 
 # Debug mode (verbose output, keeps sessions)
 npm run eval:sdk -- --debug
@@ -146,7 +146,7 @@ name: My Test Name
 description: What this test validates
 
 category: developer  # developer, business, creative, edge-case
-agent: openagent     # openagent, opencoder
+agent: openagent     # openagent
 model: opencode/big-pickle  # Optional, defaults to free tier
 
 # Single prompt (simple tests)
@@ -582,7 +582,7 @@ evals/
 │   │       ├── 04-execution-paths/
 │   │       ├── 05-edge-cases/
 │   │       └── 06-integration/
-│   └── opencoder/
+│   └── openagent/
 │       └── tests/
 │
 ├── results/                      # Test results

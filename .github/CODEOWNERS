@@ -1,4 +1,4 @@
-# Code owners for OpenAgentsControl
+# Code owners for lean-agents-control
 #
 # Owners are automatically requested for review on PRs that touch matching
 # paths. Security-sensitive paths are listed explicitly so they always require

@@ -55,6 +55,6 @@ tags:
 
 # Expected outcome:
 # - Agent delegates to ContextScout
-# - ContextScout finds .opencode/context/openagents-repo/core-concepts/evals.md
+# - ContextScout finds .opencode/context/lean-agents-repo/core-concepts/evals.md
 # - Agent loads discovered files
 # - Agent provides comprehensive answer about eval framework

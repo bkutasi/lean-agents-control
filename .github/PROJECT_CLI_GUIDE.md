@@ -1,6 +1,6 @@
 # GitHub Project CLI Guide
 
-Quick reference for managing your OpenAgents Control project board from the terminal.
+Quick reference for managing your Lean Agents Control project board from the terminal.
 
 ## 🚀 Quick Start
 
@@ -207,9 +207,9 @@ make issue-close NUM=42
 1. **Use aliases in your shell:**
    ```bash
    # Add to ~/.bashrc or ~/.zshrc
-   alias oa-idea='make -C ~/Documents/GitHub/opencode-agents idea'
-   alias oa-list='make -C ~/Documents/GitHub/opencode-agents ideas'
-   alias oa-board='make -C ~/Documents/GitHub/opencode-agents board'
+   alias lac-idea='make -C ~/Documents/GitHub/lean-agents-control idea'
+   alias lac-list='make -C ~/Documents/GitHub/lean-agents-control ideas'
+   alias lac-board='make -C ~/Documents/GitHub/lean-agents-control board'
    ```
 
 2. **Create issue templates:**
@@ -219,7 +219,7 @@ make issue-close NUM=42
 3. **Use saved searches:**
    ```bash
    # Save common queries as shell functions
-   function oa-my-issues() {
+   function lac-my-issues() {
      gh issue list --repo darrenhinde/OpenAgentsControl --assignee @me
    }
    ```

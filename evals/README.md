@@ -151,8 +151,8 @@ evals/
 npm run eval:sdk -- [options]
 
 Options:
-  --agent=NAME           Agent to test (openagent, opencoder, core/openagent)
-  --subagent=NAME        Test a subagent (coder-agent, tester, reviewer, etc.)
+  --agent=NAME           Agent to test (openagent, core/openagent)
+  --subagent=NAME        Test a subagent (coder-agent, test-engineer, reviewer, etc.)
                          Default: Standalone mode (forces mode: primary)
   --delegate             Test subagent via parent delegation (requires --subagent)
   --pattern=GLOB         Test file pattern (default: **/*.yaml)
@@ -207,7 +207,7 @@ make test-smoke
 make test-verbose
 
 # Test specific agent
-make test-agent AGENT=opencoder
+make test-agent AGENT=openagent
 
 # Test subagent (standalone mode)
 make test-subagent SUBAGENT=coder-agent

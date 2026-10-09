@@ -26,7 +26,7 @@
 **File**: `02-domain-specific-discovery.yaml`
 
 **Validates**:
-- Searches domain-specific directories (openagents-repo)
+- Searches domain-specific directories (lean-agents-repo)
 - Checks navigation.md first
 - Finds eval framework context
 - Prioritizes domain files over generic ones
@@ -145,7 +145,7 @@ npm run eval:sdk -- --agent=ContextScout --debug
 ```
 ✅ PASS
 - Checked navigation.md first
-- Found: .opencode/context/openagents-repo/core-concepts/evals.md (⭐⭐⭐⭐⭐)
+- Found: .opencode/context/lean-agents-repo/core-concepts/evals.md (⭐⭐⭐⭐⭐)
 - Also found: guides/testing-agent.md (⭐⭐⭐⭐)
 - Prioritized domain-specific over generic
 - Provided loading strategy
@@ -198,7 +198,7 @@ npm run eval:sdk -- --agent=ContextScout --debug
 **Problem**: ContextScout didn't find eval context  
 **Check**:
 - Did it check navigation.md first?
-- Did it search in openagents-repo directory?
+- Did it search in lean-agents-repo directory?
 - Did it prioritize domain files correctly?
 
 ### If Test 3 Fails (Bad Request)
@@ -228,7 +228,7 @@ npm run eval:sdk -- --agent=ContextScout --debug
 
 - [ContextScout Agent](.opencode/agent/ContextScout.md)
 - [OpenAgent Integration Tests](../../openagent/tests/contextscout-integration/)
-- [Eval Framework Concepts](.opencode/context/openagents-repo/core-concepts/evals.md)
+- [Eval Framework Concepts](.opencode/context/lean-agents-repo/core-concepts/evals.md)
 
 ---
 

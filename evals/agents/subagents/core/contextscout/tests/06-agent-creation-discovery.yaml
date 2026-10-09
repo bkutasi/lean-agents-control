@@ -5,15 +5,15 @@ description: |
   when asked about creating or modifying agents.
   
   This validates:
-  - ContextScout finds openagents-repo/core-concepts/agents.md
-  - ContextScout finds openagents-repo/guides/adding-agent.md
+  - ContextScout finds lean-agents-repo/core-concepts/agents.md
+  - ContextScout finds lean-agents-repo/guides/adding-agent.md
   - ContextScout prioritizes correctly (concepts before guides)
   - ContextScout returns exact file paths
   - ContextScout provides actionable line ranges
   
   Expected Files (in priority order):
-  1. .opencode/context/openagents-repo/core-concepts/agents.md (CRITICAL)
-  2. .opencode/context/openagents-repo/guides/adding-agent.md (HIGH)
+  1. .opencode/context/lean-agents-repo/core-concepts/agents.md (CRITICAL)
+  2. .opencode/context/lean-agents-repo/guides/adding-agent.md (HIGH)
   3. .opencode/context/core/standards/code-quality.md (MEDIUM)
   
   This test SHOULD FAIL if:
@@ -31,7 +31,7 @@ prompts:
       
       Task type: agent-creation
       
-      Search intent: I need to understand how to create a new agent in the OpenAgents repository
+      Search intent: I need to understand how to create a new agent in the lean-agents-control repository
       
       Return:
       - Exact file paths to relevant context files
@@ -62,14 +62,14 @@ tags:
   - contextscout
   - discovery
   - agent-creation
-  - openagents-repo
+  - lean-agents-repo
   - critical
 
 # Expected outcome:
-# - Uses glob to find files matching "agent" in openagents-repo
+# - Uses glob to find files matching "agent" in lean-agents-repo
 # - Uses read to load:
-#   * .opencode/context/openagents-repo/core-concepts/agents.md
-#   * .opencode/context/openagents-repo/guides/adding-agent.md
+#   * .opencode/context/lean-agents-repo/core-concepts/agents.md
+#   * .opencode/context/lean-agents-repo/guides/adding-agent.md
 #   * .opencode/context/core/standards/code-quality.md
 # - Returns structured response with:
 #   * Priority 1 (CRITICAL): agents.md - Understanding agent structure

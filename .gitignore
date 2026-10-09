@@ -182,7 +182,6 @@ temp/
 # Installation test artifacts
 .opencode.backup-*
 .opencode-test/
-.opencode-agents-version
 *.backup-*/
 
 # Test output
