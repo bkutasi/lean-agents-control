@@ -3,15 +3,15 @@ name: Validate Test Suites
 on:
   push:
     paths:
-      - 'evals/agents/*/config/**/*.json'
-      - 'evals/agents/*/tests/**/*.yaml'
-      - 'scripts/validation/validate-test-suites.sh'
+      - 'evals/agents/**/config/**/*.json'
+      - 'evals/agents/**/tests/**/*.yaml'
+      - 'evals/framework/src/sdk/validate-suites-cli.ts'
       - '.github/workflows/validate-test-suites.yml'
   pull_request:
     paths:
-      - 'evals/agents/*/config/**/*.json'
-      - 'evals/agents/*/tests/**/*.yaml'
-      - 'scripts/validation/validate-test-suites.sh'
+      - 'evals/agents/**/config/**/*.json'
+      - 'evals/agents/**/tests/**/*.yaml'
+      - 'evals/framework/src/sdk/validate-suites-cli.ts'
       - '.github/workflows/validate-test-suites.yml'
   workflow_dispatch:
 
@@ -34,16 +34,15 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: 'package-lock.json'
+          cache-dependency-path: 'evals/framework/package-lock.json'
       
       - name: Install dependencies
-        run: |
-          npm ci
+        working-directory: evals/framework
+        run: npm ci
       
       - name: Validate all test suites
-        run: |
-          cd evals/framework
-          npm run validate:suites:all
+        working-directory: evals/framework
+        run: npm run validate:suites:all
       
       # NOTE: A "Comment on PR (if validation failed)" step was removed here.
       # It called github.rest.issues.createComment, which needs `issues: write`.
@@ -58,6 +57,6 @@ jobs:
         with:
           name: suite-validation-report
           path: |
-            evals/agents/*/config/**/*.json
-            scripts/validation/validate-test-suites.sh
+            evals/agents/**/config/**/*.json
+            evals/framework/src/sdk/validate-suites-cli.ts
           retention-days: 7
