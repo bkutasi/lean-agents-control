@@ -226,3 +226,12 @@ tasks/
 integrations/claude-code/converter/generated/
 .cursorrules
 bun.lock
+
+# lean-ctx daemon state (local only)
+.lean-ctx/
+
+# opencode backups
+.opencode/.bak-*/
+
+# evals framework cache
+evals/framework/.tmp/

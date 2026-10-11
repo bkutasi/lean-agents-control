@@ -43,7 +43,7 @@
     {"action": "shell", "resource": "shutdown *", "effect": "deny"},
     {"action": "shell", "resource": "reboot *", "effect": "deny"}
   ],
-  "plugin": ["file:///home/bkutasi/.config/opencode/plugins/githubrepo-v2"],
+  "plugin": ["file://{env:HOME}/.config/opencode/plugins/githubrepo-v2"],
   "skills": ["./.opencode/skills/lean-ctx", "./.opencode/skills/context7"],
   "agents": {
     "OpenAgent": { "mode": "primary", "description": "Sole primary orchestrator, lean-ctx-native plan-first execution" },

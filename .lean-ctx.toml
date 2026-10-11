@@ -1,0 +1,30 @@
+# lean-ctx project config — OpenCode-only lean repo
+# Merged: global ~/.config/lean-ctx/config.toml <- this file (project wins for listed keys)
+
+shell_activation = "always"
+hook_mode = "replace"          # deny native Read/Grep/Glob/Shell; ctx_* only
+shadow_mode = true             # enforce ctx_* via opencode.json permission denies
+compression_level = "standard"
+default_read_mode = "signatures"
+
+[tools]
+profile = "power"              # all 79 tools; agents lazy-load via ctx_call/ctx_discover_tools/ctx_load_tools
+
+[setup]
+auto_inject_rules = true
+auto_inject_skills = true
+
+[memory.knowledge]
+max_facts = 500
+max_history = 200
+max_patterns = 100
+
+[memory.procedural]
+max_procedures = 100
+
+[memory.lifecycle]
+reclaim_enabled = true
+reclaim_headroom_pct = 0.75
+
+[proxy]
+history_mode = "cache-aware"   # byte-stable prefixes keep Anthropic 90% / OpenAI 50% cache discounts
